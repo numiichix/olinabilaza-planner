@@ -4,17 +4,17 @@
 
 @section('content')
 <div class="hero hero-dash">
-    <h1>Halo, {{ auth()->user()->name }}</h1>
-    <a class="btn btn-yellow btn-lg" href="{{ route('tasks.create') }}">+ Tambah Tugas</a>
+    <h1>Hello, {{ auth()->user()->name }}</h1>
+    <a class="btn btn-yellow btn-lg" href="{{ route('tasks.create') }}">+ Add Task</a>
 </div>
 
 @php
     // [angka, label, kelas warna, kemiringan bintang (derajat)]
     $stats = [
-        [$courseCount, 'Mata Kuliah',   'star-pink',   -3],
-        [$pendingCount, 'Tugas Tersisa', 'star-yellow',  3],
-        [$doneCount,    'Tugas Selesai', 'star-green',  -2],
-        [$noteCount,    'Catatan',       'star-blue',    3],
+        [$courseCount, 'Courses',        'star-pink',   -3],
+        [$pendingCount, 'Tasks Left', 'star-yellow',  3],
+        [$doneCount,    'Tasks Done', 'star-green',  -2],
+        [$noteCount,    'Notes',          'star-blue',    3],
     ];
 @endphp
 
@@ -34,25 +34,25 @@
 </div>
 
 <div class="progress-card">
-    <h3>Progress Tugas : {{ $progress }}%</h3>
+    <h3>Task Progress : {{ $progress }}%</h3>
     <div class="progress"><span style="width: {{ $progress }}%"></span></div>
 </div>
 
 <div class="panel-green">
-    <h2>Deadline</h2>
+    <h2>Deadlines</h2>
     @forelse ($upcoming as $task)
         <div class="row">
             <div class="row-main">
                 <div class="row-title">{{ $task->title }}</div>
                 <div class="row-meta">
                     {{ $task->course->name }} <span class="sep">·</span> {{ $task->deadline->translatedFormat('d M Y') }}
-                    @if ($task->is_overdue) <span class="badge b-late">Terlambat</span> @endif
+                    @if ($task->is_overdue) <span class="badge b-late">Overdue</span> @endif
                 </div>
             </div>
-            <span class="badge b-{{ $task->priority }}">{{ ['low' => 'Rendah', 'medium' => 'Sedang', 'high' => 'Tinggi'][$task->priority] }}</span>
+            <span class="badge b-{{ $task->priority }}">{{ ['low' => 'Low', 'medium' => 'Medium', 'high' => 'High'][$task->priority] }}</span>
         </div>
     @empty
-        <p class="empty-msg">Yey belum ada tugas</p>
+        <p class="empty-msg">Yay, no tasks yet</p>
     @endforelse
 </div>
 @endsection

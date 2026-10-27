@@ -4,8 +4,8 @@
 
 @section('content')
 <div class="hero">
-    <h1>Selamat Datang !</h1>
-    <p>apa yang mau dikerjakan hari ini?</p>
+    <h1>Welcome !</h1>
+    <p>what do you want to work on today?</p>
 </div>
 
 <div class="form-card login-card">
@@ -17,11 +17,11 @@
         <label for="password">Password</label>
         <input id="password" type="password" name="password" required>
 
-        <label class="check-row"><input type="checkbox" name="remember" value="1"> Ingat saya</label>
+        <label class="check-row"><input type="checkbox" name="remember" value="1"> Remember me</label>
 
         <div class="form-actions">
-            <button class="btn" type="submit">Masuk</button>
-            <a class="btn btn-outline" href="{{ route('register') }}">Buat akun</a>
+            <button class="btn" type="submit">Log in</button>
+            <a class="btn btn-outline" href="{{ route('register') }}">Create account</a>
         </div>
     </form>
 </div>

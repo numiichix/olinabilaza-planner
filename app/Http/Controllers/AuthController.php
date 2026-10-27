@@ -21,12 +21,12 @@ class AuthController extends Controller
             'password' => 'required|string|min:6|confirmed',
         ]);
 
-        $user = User::create($data); // password otomatis di-hash oleh model User
+        $user = User::create($data); // password is automatically hashed by the User model
 
         Auth::login($user);
         $request->session()->regenerate();
 
-        return redirect()->route('dashboard')->with('success', 'Akun berhasil dibuat. Selamat datang!');
+        return redirect()->route('dashboard')->with('success', 'Account created successfully. Welcome!');
     }
 
     public function showLogin()
@@ -44,10 +44,10 @@ class AuthController extends Controller
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
 
-            return redirect()->intended(route('dashboard'))->with('success', 'Berhasil masuk.');
+            return redirect()->intended(route('dashboard'))->with('success', 'Logged in successfully.');
         }
 
-        return back()->withErrors(['email' => 'Email atau password salah.'])->onlyInput('email');
+        return back()->withErrors(['email' => 'Incorrect email or password.'])->onlyInput('email');
     }
 
     public function logout(Request $request)
@@ -56,6 +56,6 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('login')->with('success', 'Kamu sudah keluar.');
+        return redirect()->route('login')->with('success', 'You have been logged out.');
     }
 }

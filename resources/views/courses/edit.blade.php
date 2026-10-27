@@ -1,8 +1,8 @@
 @extends('layouts.app')
-@section('title', 'Edit Mata Kuliah')
+@section('title', 'Edit Course')
 
 @section('content')
-<h1 class="page-title-center">Edit Mata Kuliah</h1>
+<h1 class="page-title-center">Edit Course</h1>
 <div class="form-card">
     <form method="POST" action="{{ route('courses.update', $course) }}">
         @method('PUT')

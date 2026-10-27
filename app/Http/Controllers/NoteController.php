@@ -50,7 +50,7 @@ class NoteController extends Controller
         $data = $request->validate($this->rules());
         $request->user()->notes()->create($data);
 
-        return redirect()->route('notes.index')->with('success', 'Catatan berhasil disimpan.');
+        return redirect()->route('notes.index')->with('success', 'Note saved successfully.');
     }
 
     public function edit(Request $request, Note $note)
@@ -66,7 +66,7 @@ class NoteController extends Controller
         $this->own($note);
         $note->update($request->validate($this->rules()));
 
-        return redirect()->route('notes.index')->with('success', 'Catatan berhasil diperbarui.');
+        return redirect()->route('notes.index')->with('success', 'Note updated successfully.');
     }
 
     public function destroy(Note $note)
@@ -74,6 +74,6 @@ class NoteController extends Controller
         $this->own($note);
         $note->delete();
 
-        return redirect()->route('notes.index')->with('success', 'Catatan dihapus.');
+        return redirect()->route('notes.index')->with('success', 'Note deleted.');
     }
 }

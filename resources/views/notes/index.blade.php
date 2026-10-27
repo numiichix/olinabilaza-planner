@@ -1,19 +1,19 @@
 @extends('layouts.app')
-@section('title', 'Catatan')
+@section('title', 'Notes')
 
 @section('content')
 <div class="page-head">
-    <h1>Catatan</h1>
-    <p>Simpan ringkasan materi kuliahmu di sini</p>
-    <a class="btn btn-sm" href="{{ route('notes.create') }}">+ Tambah Catatan</a>
+    <h1>Notes</h1>
+    <p>Keep your lecture summaries here</p>
+    <a class="btn btn-sm" href="{{ route('notes.create') }}">+ Add Note</a>
 </div>
 
 <form class="filters filters-note" method="GET" action="{{ route('notes.index') }}">
     <div>
-        <label for="q">Cari catatan</label>
-        <input id="q" type="text" name="q" value="{{ request('q') }}" placeholder="judul atau isi catatan">
+        <label for="q">Search notes</label>
+        <input id="q" type="text" name="q" value="{{ request('q') }}" placeholder="title or note content">
     </div>
-    <div><button class="btn btn-green" type="submit">Cari</button></div>
+    <div><button class="btn btn-green" type="submit">Search</button></div>
 </form>
 
 <div class="grid list">
@@ -24,14 +24,14 @@
             <p class="note-body">{{ \Illuminate\Support\Str::limit($note->content, 160) }}</p>
             <div class="row-actions">
                 <a class="btn btn-sm btn-green" href="{{ route('notes.edit', $note) }}">Edit</a>
-                <form class="inline" method="POST" action="{{ route('notes.destroy', $note) }}" onsubmit="return confirm('Hapus catatan ini?')">
+                <form class="inline" method="POST" action="{{ route('notes.destroy', $note) }}" onsubmit="return confirm('Delete this note?')">
                     @csrf @method('DELETE')
-                    <button class="btn btn-sm btn-danger" type="submit">Hapus</button>
+                    <button class="btn btn-sm btn-danger" type="submit">Delete</button>
                 </form>
             </div>
         </div>
     @empty
-        <div class="empty empty-wide">Belum ada catatan.</div>
+        <div class="empty empty-wide">No notes yet.</div>
     @endforelse
 </div>
 @endsection

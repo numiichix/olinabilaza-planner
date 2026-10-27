@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('notes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();             // FOREIGN KEY -> users.id
-            $table->foreignId('course_id')->nullable()->constrained()->nullOnDelete();  // FOREIGN KEY -> courses.id (boleh kosong)
+            $table->foreignId('course_id')->nullable()->constrained()->nullOnDelete();  // FOREIGN KEY -> courses.id (nullable)
             $table->string('title', 150);
             $table->text('content');
             $table->timestamps();

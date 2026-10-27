@@ -46,7 +46,7 @@ class CourseController extends Controller
         $data = $request->validate($this->rules());
         $request->user()->courses()->create($data);
 
-        return redirect()->route('courses.index')->with('success', 'Mata kuliah berhasil ditambahkan.');
+        return redirect()->route('courses.index')->with('success', 'Course added successfully.');
     }
 
     public function edit(Course $course)
@@ -61,14 +61,14 @@ class CourseController extends Controller
         $this->own($course);
         $course->update($request->validate($this->rules()));
 
-        return redirect()->route('courses.index')->with('success', 'Mata kuliah berhasil diperbarui.');
+        return redirect()->route('courses.index')->with('success', 'Course updated successfully.');
     }
 
     public function destroy(Course $course)
     {
         $this->own($course);
-        $course->delete(); // tugas terkait ikut terhapus (cascade), catatan jadi tanpa mata kuliah
+        $course->delete(); // related tasks are deleted too (cascade), notes are kept without a course
 
-        return redirect()->route('courses.index')->with('success', 'Mata kuliah dihapus.');
+        return redirect()->route('courses.index')->with('success', 'Course deleted.');
     }
 }

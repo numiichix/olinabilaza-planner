@@ -8,18 +8,18 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Course extends Model
 {
-    // 1 = Senin ... 7 = Minggu (dipakai di form dan tampilan)
-    public const DAYS = [1 => 'Senin', 2 => 'Selasa', 3 => 'Rabu', 4 => 'Kamis', 5 => 'Jumat', 6 => 'Sabtu', 7 => 'Minggu'];
+    // 1 = Monday ... 7 = Sunday (used in forms and views)
+    public const DAYS = [1 => 'Monday', 2 => 'Tuesday', 3 => 'Wednesday', 4 => 'Thursday', 5 => 'Friday', 6 => 'Saturday', 7 => 'Sunday'];
 
     protected $fillable = ['user_id', 'code', 'name', 'lecturer', 'credits', 'day', 'start_time', 'end_time'];
 
-    // contoh: "Rabu"
+    // example: "Wednesday"
     public function getDayNameAttribute(): string
     {
         return self::DAYS[$this->day] ?? '-';
     }
 
-    // contoh: "15.00 - 18.00"
+    // example: "15.00 - 18.00"
     public function getTimeRangeAttribute(): string
     {
         $fmt = fn ($t) => str_replace(':', '.', substr($t, 0, 5));

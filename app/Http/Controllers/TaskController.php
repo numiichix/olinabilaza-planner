@@ -16,7 +16,7 @@ class TaskController extends Controller
     private function rules(): array
     {
         return [
-            // course_id harus ada DAN milik user yang sedang login
+            // course_id must exist AND belong to the logged-in user
             'course_id' => ['required', Rule::exists('courses', 'id')->where('user_id', auth()->id())],
             'title' => 'required|string|max:150',
             'description' => 'nullable|string|max:2000',
@@ -29,15 +29,15 @@ class TaskController extends Controller
     {
         $query = $request->user()->tasks()->with('course');
 
-        // Fitur: pencarian
+        // Feature: search
         if ($request->filled('q')) {
             $query->where('title', 'like', '%'.$request->q.'%');
         }
-        // Fitur: filter mata kuliah
+        // Feature: course filter
         if ($request->filled('course_id')) {
             $query->where('course_id', $request->course_id);
         }
-        // Fitur: filter status
+        // Feature: status filter
         if ($request->status === 'done') {
             $query->where('is_done', true);
         } elseif ($request->status === 'pending') {
@@ -62,7 +62,7 @@ class TaskController extends Controller
         $data = $request->validate($this->rules());
         $request->user()->tasks()->create($data);
 
-        return redirect()->route('tasks.index')->with('success', 'Tugas berhasil ditambahkan.');
+        return redirect()->route('tasks.index')->with('success', 'Task added successfully.');
     }
 
     public function edit(Request $request, Task $task)
@@ -78,7 +78,7 @@ class TaskController extends Controller
         $this->own($task);
         $task->update($request->validate($this->rules()));
 
-        return redirect()->route('tasks.index')->with('success', 'Tugas berhasil diperbarui.');
+        return redirect()->route('tasks.index')->with('success', 'Task updated successfully.');
     }
 
     public function toggle(Task $task)
@@ -86,7 +86,7 @@ class TaskController extends Controller
         $this->own($task);
         $task->update(['is_done' => ! $task->is_done]);
 
-        return back()->with('success', $task->is_done ? 'Tugas ditandai selesai' : 'Tugas dikembalikan ke belum selesai.');
+        return back()->with('success', $task->is_done ? 'Task marked as done.' : 'Task marked as not done.');
     }
 
     public function destroy(Task $task)
@@ -94,6 +94,6 @@ class TaskController extends Controller
         $this->own($task);
         $task->delete();
 
-        return redirect()->route('tasks.index')->with('success', 'Tugas dihapus.');
+        return redirect()->route('tasks.index')->with('success', 'Task deleted.');
     }
 }

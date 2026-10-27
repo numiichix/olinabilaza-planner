@@ -24,7 +24,7 @@ class ProfileController extends Controller
 
         $user->update($data);
 
-        return back()->with('success', 'Profil berhasil diperbarui.');
+        return back()->with('success', 'Profile updated successfully.');
     }
 
     public function updatePassword(Request $request)
@@ -36,6 +36,6 @@ class ProfileController extends Controller
 
         $request->user()->update(['password' => $request->password]);
 
-        return back()->with('success', 'Password berhasil diganti.');
+        return back()->with('success', 'Password changed successfully.');
     }
 }

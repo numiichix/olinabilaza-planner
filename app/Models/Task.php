@@ -29,7 +29,7 @@ class Task extends Model
         return $this->belongsTo(Course::class);
     }
 
-    // true kalau belum selesai dan deadline sudah lewat
+    // true if not done and the deadline has passed
     public function getIsOverdueAttribute(): bool
     {
         return ! $this->is_done && $this->deadline->isPast() && ! $this->deadline->isToday();

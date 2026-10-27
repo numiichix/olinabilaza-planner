@@ -15,9 +15,9 @@ return new class extends Migration
             $table->string('name', 120);
             $table->string('lecturer', 120)->nullable();
             $table->unsignedTinyInteger('credits')->default(3);
-            $table->unsignedTinyInteger('day');   // hari kuliah: 1 = Senin ... 7 = Minggu
-            $table->time('start_time');           // jam mulai
-            $table->time('end_time');             // jam selesai
+            $table->unsignedTinyInteger('day');   // class day: 1 = Monday ... 7 = Sunday
+            $table->time('start_time');           // start time
+            $table->time('end_time');             // end time
             $table->timestamps();
         });
     }

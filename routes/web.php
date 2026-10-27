@@ -8,10 +8,10 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
-// Halaman awal -> arahkan ke dashboard (kalau belum login otomatis ke halaman login)
+// Home page -> redirect to dashboard (guests are sent to the login page automatically)
 Route::get('/', fn () => redirect()->route('dashboard'));
 
-// ---------- Hanya untuk tamu (belum login) ----------
+// ---------- Guests only (not logged in) ----------
 Route::middleware('guest')->group(function () {
     Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
     Route::post('/register', [AuthController::class, 'register']);
@@ -19,7 +19,7 @@ Route::middleware('guest')->group(function () {
     Route::post('/login', [AuthController::class, 'login']);
 });
 
-// ---------- Hanya untuk user yang sudah login ----------
+// ---------- Logged-in users only ----------
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
