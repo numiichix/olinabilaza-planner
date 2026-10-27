@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', 'OliNabilAza Planner') · OliNabilAza Planner</title>
+    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
     {{-- Font isi: Poppins. Font header: ChemyRetro (dimuat dari public/fonts lewat style.css) --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
